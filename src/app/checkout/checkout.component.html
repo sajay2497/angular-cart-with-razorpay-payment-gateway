@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-1">&nbsp;</div>
+        <div class="col-md-10">
+            <h2 class="text-center my-5 ">Cart</h2>
+            <table class="table  table-striped mebo" style="border: solid 1px #f1f1f1;">
+                <thead>
+                    <tr>
+                        <th scope="col">IMAGE</th>
+                        <th scope="col">PRODUCT NAME</th>
+                        <th scope="col">PRICE</th>
+                        <th scope="col">QUANTITY</th>
+                        <th scope="col">ACTION</th>
+                        <th scope="col">TOTAL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of allcartitem">
+                        <td> <img src="{{item?.product.image}}" alt="{{item?.product.title}}"
+                                style="width: 100px; height: 100px; object-fit: cover;"></td>
+                        <td>{{item?.product.title}}</td>
+                        <td>{{item?.product.price | currency:'INR'}}</td>
+                        <td>{{item?.quantity}}</td>
+                        <td>
+                            <div class="quantity buttons_added">
+                                <input type="button" value="-" class="minus"
+                                    (click)="item.quantity == 1? singlecartdelete(item?.product.id) : cartmins(item?.product.id)">
+                                <input type="number" step="1" min="1" max="" name="quantity" value="{{item?.quantity}}"
+                                    title="Qty" class="input-text qty text" size="4" pattern="" inputmode="">
+                                <input type="button" value="+" class="plus" (click)="cartplus(item?.product.id)">
+                            </div>
+                        </td>
+                        <td>{{item?.product.price * item?.quantity | currency:'INR'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row" *ngIf="total != 0">
+                <div class="col-md-6">&nbsp;</div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Total</h5>
+                            <p class="card-text">Total Amount: {{total | currency:'INR'}}</p>
+                            <button (click)="payment(total)" class="card-link btn btn-primary"
+                                style="width: -webkit-fill-available;">Proceed To Payment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

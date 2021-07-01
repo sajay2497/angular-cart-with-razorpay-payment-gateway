@@ -1,0 +1,21 @@
+<p style="font-size: 25px; font-weight: bold; text-align: center;" class="my-5">All Product List</p>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3" *ngFor="let item of productlist">
+            <div class="card" style="width: 18rem;">
+                <img src="{{item?.image}}" class="card-img-top" alt="{{item?.title}}" style="    object-fit: cover;
+                width: 250px;">
+                <div class="card-body">
+                  <h5 class="card-title">{{item?.title}}</h5>
+                  <p class="card-text">{{item?.description}}</p>
+                  <div>
+                      <b>Price: {{item?.price}}</b> &nbsp;
+                    <button class="btn btn-primary" (click)="addtocart(item)">Add To Cart</button>
+
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
