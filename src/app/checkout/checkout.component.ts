@@ -85,9 +85,10 @@ export class CheckoutComponent implements OnInit {
     this.cartservice.deleteItem(id);
   }
 
-  payment(total: number) {
-    let totalpayamount = (total * 100).toString();
-
+  payment() {
+    let finalamount = parseInt((this.total).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    let totalpayamount = (finalamount * 100).toString();
+   
     this.options.amount = totalpayamount
     // let rzp1 = new this.paymentservice.nativeWindow.Razorpay(this.options); // use service se
     let rzp1 = new Razorpay(this.options);

@@ -9,21 +9,22 @@ import { CartService } from '../cart.service';
 })
 export class HomeComponent implements OnInit {
   productlist: any;
-
-  constructor(private http:HttpClient, private cartservice: CartService) { }
+  loading: boolean = true
+  constructor(private http: HttpClient, private cartservice: CartService) { }
 
   ngOnInit(): void {
     this.fatchproduct();
   }
 
-  fatchproduct(){
+  fatchproduct() {
     this.http.get('https://fakestoreapi.com/products').subscribe(
-      res=>{
+      res => {
         this.productlist = res
+        this.loading = false
       }
     )
   }
-  addtocart(data:any){
+  addtocart(data: any) {
     this.cartservice.addtocart(data);
   }
 
